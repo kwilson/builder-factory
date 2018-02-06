@@ -1,0 +1,22 @@
+{
+  "name": "builder-factory",
+  "version": "1.0.0",
+  "description": "Factory for creating basic object types during testing.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine-ts \"*.spec.ts\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "jasmine-spec-reporter": "^4.2.1",
+    "jasmine-ts": "^0.2.1",
+    "typescript": "^2.7.1"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.101",
+    "lodash": "^4.17.5"
+  }
+}
