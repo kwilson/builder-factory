@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = require("./");
+var _1 = __importDefault(require("./"));
 describe('Builder', function () {
     var seed = {
         name: 'User name',
@@ -10,7 +13,7 @@ describe('Builder', function () {
     describe('construction', function () {
         it('returns a different instance on calls to build', function () {
             // Act
-            var result = _1.Builder.create(seed).build();
+            var result = _1.default.create(seed).build();
             // Assert
             expect(result).not.toBe(seed);
             expect(result).toEqual(seed);
@@ -18,7 +21,7 @@ describe('Builder', function () {
         [undefined, null].forEach(function (value) {
             it("throws an error if the seed value is " + value, function () {
                 expect(function () {
-                    var val = _1.Builder.create(value);
+                    var val = _1.default.create(value);
                 }).toThrow();
             });
         });
@@ -26,7 +29,7 @@ describe('Builder', function () {
     describe('with', function () {
         var builder;
         beforeEach(function () {
-            builder = _1.Builder.create(seed);
+            builder = _1.default.create(seed);
         });
         it('sets the value of the specified property', function () {
             // Arrange
@@ -42,7 +45,7 @@ describe('Builder', function () {
     describe('without', function () {
         var builder;
         beforeEach(function () {
-            builder = _1.Builder.create(seed);
+            builder = _1.default.create(seed);
         });
         it('drops the specified property from the output', function () {
             expect(builder.without('name').build().name).not.toBeDefined();
@@ -53,7 +56,7 @@ describe('Builder', function () {
     describe('build', function () {
         var builder;
         beforeEach(function () {
-            builder = _1.Builder.create(seed);
+            builder = _1.default.create(seed);
         });
         it('returns a new object on each build', function () {
             // Act

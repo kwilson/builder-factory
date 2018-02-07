@@ -36,4 +36,4 @@ var Builder = /** @class */ (function () {
     };
     return Builder;
 }());
-exports.Builder = Builder;
+exports.default = Builder;

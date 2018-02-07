@@ -1,6 +1,6 @@
 import { cloneDeep, set, isNil } from 'lodash';
 
-export class Builder<T extends object> {
+export default class Builder<T extends object> {
   static create<T extends object>(instance: T) {
     if (isNil(instance)) {
       throw Error(`Seed value cannot be null or undefined. Value was ${instance}.`);
