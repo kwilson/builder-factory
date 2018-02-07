@@ -1,6 +1,6 @@
 {
   "name": "builder-factory",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Factory for creating basic object types during testing.",
   "main": "dist/index.js",
   "scripts": {
