@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jasmine-ts \"*.spec.ts\""
+    "test": "jasmine-ts \"src/*.spec.ts\"",
+    "shipit": "npm run build && npm run test && npm version patch && npm publish"
   },
   "author": "Kevin Wilson <kevin@partcoffee.com>",
   "license": "MIT",
