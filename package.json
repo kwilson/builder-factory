@@ -14,7 +14,8 @@
     "url": "https://github.com/kwilson/builder-factory"
   },
   "files": [
-    "./dist"
+    "./index.js",
+    "./index.d.ts"
   ],
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
