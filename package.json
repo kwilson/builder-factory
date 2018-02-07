@@ -2,7 +2,7 @@
   "name": "builder-factory",
   "version": "1.0.4",
   "description": "Factory for creating basic object types during testing.",
-  "main": "dist/index.js",
+  "main": "./index.js",
   "scripts": {
     "build": "tsc",
     "test": "jasmine-ts \"*.spec.ts\""
