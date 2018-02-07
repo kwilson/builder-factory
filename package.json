@@ -7,8 +7,12 @@
     "build": "tsc",
     "test": "jasmine-ts \"*.spec.ts\""
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kevin Wilson <kevin@partcoffee.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwilson/builder-factory"
+  },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "jasmine-spec-reporter": "^4.2.1",
