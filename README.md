@@ -7,7 +7,7 @@ Factory for creating basic object types during testing.
 Each builder instance is initialised with a seed object. This will be the default return object of that instance's `build` call.
 
 ```js
-import Builder from 'builder';
+import Builder from 'builder-factory';
 
 const builder = Builder.create({
   name: 'User name',
