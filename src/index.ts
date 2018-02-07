@@ -12,7 +12,7 @@ export default class Builder<T extends object> {
   private constructor(private instance: T, private withoutProperties: Array<keyof T> = []) {
   }
 
-  with(property: keyof T, value: any): Builder<T> {
+  with<K extends keyof T>(property: K, value: T[K]): Builder<T> {
     const cloned = cloneDeep(this.instance);
     set(cloned, property, value);
     return new Builder(cloned);
