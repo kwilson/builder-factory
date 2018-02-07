@@ -2,7 +2,7 @@
   "name": "builder-factory",
   "version": "1.0.5",
   "description": "Factory for creating basic object types during testing.",
-  "main": "./index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jasmine-ts \"*.spec.ts\""
@@ -14,8 +14,7 @@
     "url": "https://github.com/kwilson/builder-factory"
   },
   "files": [
-    "./index.js",
-    "./index.d.ts"
+    "dist"
   ],
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
