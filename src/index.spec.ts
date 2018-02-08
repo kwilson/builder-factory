@@ -1,4 +1,4 @@
-import Builder from './';
+import Builder from './index';
 
 describe('Builder', () => {
   interface IPerson {
