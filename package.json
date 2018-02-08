@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jasmine-ts \"src/*.spec.ts\"",
+    "test": "jest",
     "shipit": "npm run build && npm run test && npm version patch && npm publish"
   },
   "author": "Kevin Wilson <kevin@partcoffee.com>",
@@ -19,13 +19,32 @@
     "index.d.ts"
   ],
   "devDependencies": {
-    "@types/jasmine": "^2.8.6",
-    "jasmine-spec-reporter": "^4.2.1",
-    "jasmine-ts": "^0.2.1",
+    "@types/jest": "^22.1.1",
+    "jest": "^22.2.1",
+    "ts-jest": "^22.0.3",
     "typescript": "^2.7.1"
   },
   "dependencies": {
     "@types/lodash": "^4.14.101",
     "lodash": "^4.17.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./tsconfig.test.json"
+      }
+    }
   }
 }
