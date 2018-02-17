@@ -32,7 +32,7 @@ describe('Builder', () => {
     });
   });
 
-  describe('with', () => {
+  describe('with property', () => {
     let builder: Builder<IPerson>;
     beforeEach(() => {
       builder = Builder.create(seed);
@@ -48,6 +48,31 @@ describe('Builder', () => {
       expect(builder.with('name', newName).build().name).toEqual(newName);
       expect(builder.with('age', newAge).build().age).toEqual(newAge);
       expect(builder.with('isActive', newIsActive).build().isActive).toEqual(newIsActive);
+    });
+  });
+
+  describe('with object', () => {
+    let builder: Builder<IPerson>;
+    beforeEach(() => {
+      builder = Builder.create(seed);
+    });
+
+    it('sets the values of the specified properties', () => {
+      // Arrange
+      const newName = 'Different Name';
+      const newIsActive = false;
+
+      // Act
+      const result = builder.with({
+        name: newName,
+        isActive: newIsActive
+      }).build();
+
+      // Assert
+      expect(result.name).toEqual(newName);
+      expect(result.isActive).toEqual(newIsActive);
+
+      expect(result.age).toEqual(seed.age);
     });
   });
 
