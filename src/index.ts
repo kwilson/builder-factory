@@ -1,4 +1,6 @@
-import { cloneDeep, set, isNil } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
+import isNil from 'lodash/isNil';
 
 export default class Builder<T extends object> {
   static create<T extends object>(instance: T) {
