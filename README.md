@@ -35,6 +35,16 @@ console.log(builder.build());
 // { name: 'User name', age: 37, isActive: true }
 ```
 
+You can also set values by passing a compatible object:
+```js
+const updated = builder.with({
+  age: 21,
+  isAtive: false
+});
+
+console.log(updated.build());
+// { name: 'User name', age: 21, isActive: false }
+```
 
 ### Drop Values
 Use `without` to drop values.
