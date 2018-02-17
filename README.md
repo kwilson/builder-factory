@@ -39,7 +39,7 @@ You can also set values by passing a compatible object:
 ```js
 const updated = builder.with({
   age: 21,
-  isAtive: false
+  isActive: false
 });
 
 console.log(updated.build());
