@@ -74,6 +74,31 @@ describe('Builder', () => {
 
       expect(result.age).toEqual(seed.age);
     });
+
+    it('sets the values of the specified extended object properties', () => {
+      // Arrange
+      interface IExtendedPerson extends IPerson {
+        isExtended: boolean;
+      }
+
+      const newName = 'Different Name';
+      const newIsActive = false;
+      const newIsExtended = true;
+
+      // Act
+      const result = builder.with<IExtendedPerson>({
+        name: newName,
+        isActive: newIsActive,
+        isExtended: newIsExtended
+      }).build();
+
+      // Assert
+      expect(result.name).toEqual(newName);
+      expect(result.isActive).toEqual(newIsActive);
+      expect(result.isExtended).toEqual(newIsExtended);
+
+      expect(result.age).toEqual(seed.age);
+    });
   });
 
   describe('without', () => {

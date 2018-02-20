@@ -16,7 +16,7 @@ export default class Builder<T extends object> {
   private constructor(private instance: T, private withoutProperties: Array<keyof T> = []) {
   }
 
-  with<K extends keyof T>(data: Partial<T>): Builder<T>;
+  with<TExtended extends T>(data: Partial<TExtended>): Builder<TExtended>;
   with<K extends keyof T>(property: K, value: T[K]): Builder<T>;
   with<K extends keyof T>(keyOrObject: K | Partial<T>, value?: any): Builder<T> {
     if (typeof keyOrObject === 'string') {
