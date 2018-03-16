@@ -1,4 +1,6 @@
-import { cloneDeep, set, isNil } from 'lodash';
+import cloneDeep = require('lodash/cloneDeep');
+import set = require('lodash/set');
+import isNil = require('lodash/isNil');
 
 export type Partial<T> = {
   [P in keyof T]?: T[P];
