@@ -46,8 +46,10 @@ export default class Builder<T extends object> {
   }
 
   without(...properties: Array<keyof T>): Builder<T> {
-    this.withoutProperties.push(...properties);
-    return this;
+    const cloned = cloneDeep(this.instance);
+    const without = [...this.withoutProperties, ...properties];
+
+    return new Builder(cloned, without);
   }
 
   build(): T {

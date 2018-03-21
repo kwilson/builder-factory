@@ -45,9 +45,20 @@ describe('Builder', () => {
       const newIsActive = false;
 
       // Assert
-      expect(builder.with('name', newName).build().name).toEqual(newName);
-      expect(builder.with('age', newAge).build().age).toEqual(newAge);
-      expect(builder.with('isActive', newIsActive).build().isActive).toEqual(newIsActive);
+      expect(builder.with('name', newName).build()).toEqual(expect.objectContaining({
+        ...seed,
+        name: newName
+      }));
+
+      expect(builder.with('age', newAge).build()).toEqual(expect.objectContaining({
+        ...seed,
+        age: newAge
+      }));
+
+      expect(builder.with('isActive', newIsActive).build()).toEqual(expect.objectContaining({
+        ...seed,
+        isActive: newIsActive
+      }));
     });
   });
 
@@ -69,10 +80,13 @@ describe('Builder', () => {
       }).build();
 
       // Assert
-      expect(result.name).toEqual(newName);
-      expect(result.isActive).toEqual(newIsActive);
+      expect(result).toEqual({
+        ...seed,
+        name: newName,
+        isActive: newIsActive
+      });
 
-      expect(result.age).toEqual(seed.age);
+      expect(builder.build()).toEqual(seed);
     });
 
     it('sets the values of the specified extended object properties', () => {
@@ -98,6 +112,8 @@ describe('Builder', () => {
       expect(result.isExtended).toEqual(newIsExtended);
 
       expect(result.age).toEqual(seed.age);
+
+      expect(builder.build()).toEqual(seed);
     });
   });
 
@@ -111,6 +127,23 @@ describe('Builder', () => {
       expect(builder.without('name').build().name).not.toBeDefined();
       expect(builder.without('age').build().age).not.toBeDefined();
       expect(builder.without('isActive').build().isActive).not.toBeDefined();
+    });
+
+    it('does not modify the original', () => {
+      // Assert
+      expect(builder.without('name').build()).toEqual(expect.objectContaining({
+        age: seed.age,
+        isActive: seed.isActive
+      }));
+
+      expect(builder.without('age').build()).toEqual(expect.objectContaining({
+        name: seed.name,
+        isActive: seed.isActive
+      }));
+
+      expect(builder.without('age', 'isActive').build()).toEqual(expect.objectContaining({
+        name: seed.name
+      }));
     });
   });
 
