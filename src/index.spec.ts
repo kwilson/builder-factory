@@ -188,4 +188,59 @@ describe('Builder', () => {
       expect(second).toEqual(first);
     });
   });
+
+  describe('chaining', () => {
+    let builder: Builder<IPerson>;
+    beforeEach(() => {
+      builder = Builder.create(seed);
+    });
+
+    it('handles chaining of without then with key', () => {
+      const b = builder
+        .without('name', 'isActive')
+        .with('age', 99)
+        .build();
+
+      expect(b.name).not.toBeDefined();
+      expect(b.isActive).not.toBeDefined();
+      expect(b.age).toBe(99);
+    });
+
+    it('handles chaining of without then with key when re-adding value', () => {
+      const b = builder
+        .without('name', 'age', 'isActive')
+        .with('age', 99)
+        .build();
+
+      expect(b.name).not.toBeDefined();
+      expect(b.isActive).not.toBeDefined();
+      expect(b.age).toBe(99);
+    });
+
+    it('handles chaining of without then with object', () => {
+      const b = builder
+        .without('name', 'isActive')
+        .with({
+          age: 99
+        })
+        .build();
+
+      expect(b.name).not.toBeDefined();
+      expect(b.isActive).not.toBeDefined();
+      expect(b.age).toBe(99);
+    });
+
+    it('handles chaining of without then with object when re-adding value', () => {
+      const b = builder
+        .without('name', 'age', 'isActive')
+        .with({
+          age: 99
+        })
+        .build();
+
+      expect(b.name).not.toBeDefined();
+      expect(b.isActive).not.toBeDefined();
+      expect(b.age).toBe(99);
+    });
+  });
 });

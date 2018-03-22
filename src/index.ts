@@ -30,7 +30,9 @@ export default class Builder<T extends object> {
 
   private withProperty<K extends keyof T>(property: K, value: T[K]): Builder<T> {
     const updated = set(cloneDeep(this.instance), property, value);
-    return new Builder(updated);
+    const without = this.withoutProperties.filter((x) => x !== property);
+
+    return new Builder(updated, without);
   }
 
   private withObject(data: { [P in keyof T]?: T[P] }): Builder<T> {
@@ -42,7 +44,10 @@ export default class Builder<T extends object> {
       }
     }
 
-    return new Builder(cloned);
+    const dataKeys = Object.keys(data);
+    const without = this.withoutProperties.filter((x) => dataKeys.indexOf(x) === -1);
+
+    return new Builder(cloned, without);
   }
 
   without(...properties: Array<keyof T>): Builder<T> {
