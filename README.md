@@ -19,6 +19,55 @@ console.log(builder.build());
 // { name: 'User name', age: 37, isActive: true }
 ```
 
+### Build A Collection
+If you want to build a collection of objects, use `buildMany`.
+
+```js
+import Builder from 'builder-factory';
+
+const builder = Builder.create({
+  name: 'User name',
+  age: 37,
+  isActive: true
+});
+
+console.log(builder.buildMany(5));
+// [
+//   { name: 'User name', age: 37, isActive: true },
+//   { name: 'User name', age: 37, isActive: true },
+//   { name: 'User name', age: 37, isActive: true },
+//   { name: 'User name', age: 37, isActive: true },
+//   { name: 'User name', age: 37, isActive: true }
+// ]
+```
+
+You can optionally supply a factory wrapper to manipulate the items as they
+are created.
+
+```js
+import Builder from 'builder-factory';
+
+const builder = Builder.create({
+  name: 'User name',
+  age: 37,
+  isActive: true
+});
+
+console.log(
+  builder.buildMany(
+    5,
+    (builder, i) => builder.with({ age: i }).without('isActive')
+  )
+);
+// [
+//   { name: 'User name', age: 0 },
+//   { name: 'User name', age: 1 },
+//   { name: 'User name', age: 2 },
+//   { name: 'User name', age: 3 },
+//   { name: 'User name', age: 4 }
+// ]
+```
+
 ### Set Values
 Use `with` to set values.
 

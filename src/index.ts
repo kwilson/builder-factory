@@ -1,6 +1,7 @@
 import cloneDeep = require('lodash/cloneDeep');
 import set = require('lodash/set');
 import isNil = require('lodash/isNil');
+import range = require('lodash/range');
 
 export type Partial<T> = {
   [P in keyof T]?: T[P];
@@ -64,5 +65,12 @@ export default class Builder<T extends object> {
     });
 
     return cloned;
+  }
+
+  buildMany(count:number, factory?:(builder:Builder<T>, index?:number) => Builder<T>):Array<T> {
+    return range(0, count < 0 ? 0 : count).map((x) => factory
+      ? factory(this, x).build()
+      : this.build()
+    );
   }
 }
