@@ -243,4 +243,55 @@ describe('Builder', () => {
       expect(b.age).toBe(99);
     });
   });
+
+  describe('buildMany', () => {
+    let builder: Builder<IPerson>;
+    beforeEach(() => {
+      builder = Builder.create(seed);
+    });
+
+    it('returns an empty array when building 0 items', () => {
+      const b = builder.buildMany(0);
+      expect(b).toHaveLength(0);
+    });
+
+    it('returns an empty array when building < 0 items', () => {
+      const b = builder.buildMany(-1);
+      expect(b).toHaveLength(0);
+    });
+
+    it('returns the correct number of items', () => {
+      const b = builder.buildMany(5);
+      expect(b).toHaveLength(5);
+
+      b.forEach((x) => expect(x).toEqual(seed));
+    });
+
+    it('returns the correct number of manipulated items', () => {
+      const b = builder.buildMany(5, (builder, i) => builder.with({ age: i }));
+      expect(b).toHaveLength(5);
+
+      b.forEach((x, i) => expect(x).toEqual({
+        ...seed,
+        age: i
+      }));
+    });
+
+    it('returns the correct number of manipulated items with multiple changes', () => {
+      const b = builder.buildMany(
+        5,
+        (builder, i) => builder
+          .with({ age: i })
+          .without('name')
+      );
+
+      expect(b).toHaveLength(5);
+
+      b.forEach((x, i) => expect(x).toEqual({
+        ...seed,
+        age: i,
+        name: undefined
+      }));
+    });
+  });
 });
