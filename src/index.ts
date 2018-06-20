@@ -4,7 +4,7 @@ import isNil = require('lodash/isNil');
 import range = require('lodash/range');
 
 export type Partial<T> = {
-  [P in Extract<keyof T, string>]?: T[P];
+  [P in keyof T]?: T[P];
 };
 
 export default class Builder<T extends object> {
@@ -16,15 +16,12 @@ export default class Builder<T extends object> {
     return new Builder(instance);
   }
 
-  private constructor(
-    private instance: T,
-    private withoutProperties: Array<Extract<keyof T, string>> = []
-  ) {
+  private constructor(private instance: T, private withoutProperties: Array<keyof T> = []) {
   }
 
   with<TExtended extends T>(data: Partial<TExtended>): Builder<TExtended>;
-  with<K extends Extract<keyof T, string>>(property: K, value: T[K]): Builder<T>;
-  with<K extends Extract<keyof T, string>>(keyOrObject: K | Partial<T>, value?: any): Builder<T> {
+  with<K extends keyof T>(property: K, value: T[K]): Builder<T>;
+  with<K extends keyof T>(keyOrObject: K | Partial<T>, value?: any): Builder<T> {
     if (typeof keyOrObject === 'string') {
       return this.withProperty(keyOrObject, value);
     }
@@ -32,14 +29,14 @@ export default class Builder<T extends object> {
     return this.withObject(keyOrObject);
   }
 
-  private withProperty<K extends Extract<keyof T, string>>(property: K, value: T[K]): Builder<T> {
+  private withProperty<K extends keyof T>(property: K, value: T[K]): Builder<T> {
     const updated = set(cloneDeep(this.instance), property, value);
     const without = this.withoutProperties.filter((x) => x !== property);
 
     return new Builder(updated, without);
   }
 
-  private withObject(data: { [P in Extract<keyof T, string>]?: T[P] }): Builder<T> {
+  private withObject(data: { [P in keyof T]?: T[P] }): Builder<T> {
     const cloned = cloneDeep(this.instance);
 
     for (const key in data) {
@@ -54,7 +51,7 @@ export default class Builder<T extends object> {
     return new Builder(cloned, without);
   }
 
-  without(...properties: Array<Extract<keyof T, string>>): Builder<T> {
+  without(...properties: Array<keyof T>): Builder<T> {
     const cloned = cloneDeep(this.instance);
     const without = [...this.withoutProperties, ...properties];
 
