@@ -20,9 +20,9 @@ export default class Builder<T extends object> {
   }
 
   with<TExtended extends T>(data: Partial<TExtended>): Builder<TExtended>;
-  with<K extends keyof T>(property: K, value: T[K]): Builder<T>;
-  with<K extends keyof T>(keyOrObject: K | Partial<T>, value?: any): Builder<T> {
-    if (typeof keyOrObject === 'string') {
+  with<K extends Extract<keyof T, string | number>>(property: K, value: T[K]): Builder<T>;
+  with<K extends Extract<keyof T, string | number>>(keyOrObject: K | Partial<T>, value?: any): Builder<T> {
+    if (typeof keyOrObject === 'string' || typeof keyOrObject === 'number') {
       return this.withProperty(keyOrObject, value);
     }
 
@@ -51,7 +51,7 @@ export default class Builder<T extends object> {
     return new Builder(cloned, without);
   }
 
-  without(...properties: Array<keyof T>): Builder<T> {
+  without(...properties: Array<Extract<keyof T, string | number>>): Builder<T> {
     const cloned = cloneDeep(this.instance);
     const without = [...this.withoutProperties, ...properties];
 
