@@ -1,6 +1,8 @@
 # builder-factory
 Factory for creating basic object types during testing.
 
+[![Build Status](https://kevinwilson.visualstudio.com/builder-factory/_apis/build/status/kwilson.builder-factory?branchName=master)](https://kevinwilson.visualstudio.com/builder-factory/_build/latest?definitionId=11&branchName=master)
+
 ## Usage
 
 ### Create A Builder
