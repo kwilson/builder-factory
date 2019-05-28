@@ -211,7 +211,7 @@ describe('Builder', () => {
     it('handles chaining of without then with key', () => {
       const b = builder
         .without('name', 'isActive')
-        .with('age', 9999999)
+        .with('age', 99)
         .build();
 
       expect(b.name).not.toBeDefined();
