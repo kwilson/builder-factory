@@ -5,14 +5,12 @@ describe('Builder', () => {
     name: string;
     age: number;
     isActive: boolean;
-    123: string;
   }
 
   const seed: IPerson = {
     name: 'User name',
     age: 37,
     isActive: true,
-    123: 'hello'
   };
 
   describe('construction', () => {
@@ -45,7 +43,6 @@ describe('Builder', () => {
       const newName = 'Different Name';
       const newAge = 21;
       const newIsActive = false;
-      const new123 = 'new 123';
 
       // Assert
       expect(builder.with('name', newName).build()).toEqual(expect.objectContaining({
@@ -62,11 +59,6 @@ describe('Builder', () => {
         ...seed,
         isActive: newIsActive
       }));
-
-      expect(builder.with(123, new123).build()).toEqual(expect.objectContaining({
-        ...seed,
-        123: new123
-      }));
     });
   });
 
@@ -80,13 +72,11 @@ describe('Builder', () => {
       // Arrange
       const newName = 'Different Name';
       const newIsActive = false;
-      const new123 = 'new 123';
 
       // Act
       const result = builder.with({
         name: newName,
         isActive: newIsActive,
-        123: new123
       }).build();
 
       // Assert
@@ -94,7 +84,6 @@ describe('Builder', () => {
         ...seed,
         name: newName,
         isActive: newIsActive,
-        123: new123
       });
 
       expect(builder.build()).toEqual(seed);
@@ -123,7 +112,6 @@ describe('Builder', () => {
       expect(result.isExtended).toEqual(newIsExtended);
 
       expect(result.age).toEqual(seed.age);
-      expect(result[123]).toEqual(seed[123]);
 
       expect(builder.build()).toEqual(seed);
     });
@@ -139,7 +127,6 @@ describe('Builder', () => {
       expect(builder.without('name').build().name).not.toBeDefined();
       expect(builder.without('age').build().age).not.toBeDefined();
       expect(builder.without('isActive').build().isActive).not.toBeDefined();
-      expect(builder.without(123).build()[123]).not.toBeDefined();
     });
 
     it('does not modify the original', () => {
