@@ -1,7 +1,7 @@
-import cloneDeep = require('lodash/cloneDeep');
-import set = require('lodash/set');
-import isNil = require('lodash/isNil');
-import range = require('lodash/range');
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
+import isNil from 'lodash/isNil';
+import range from 'lodash/range';
 
 export type Partial<T> = {
   [P in keyof T]?: T[P];
