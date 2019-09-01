@@ -1,6 +1,6 @@
 {
   "name": "builder-factory",
-  "version": "2.1.4",
+  "version": "2.2.0-rollup.1",
   "description": "Factory for creating basic object types during testing.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
